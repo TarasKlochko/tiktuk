@@ -105,7 +105,7 @@ export default function User() {
             {postsList.itemList.map((item, index) => {
               if (index >= firstPost && index < lastPost) {
                 return (
-                  <li className="video-list__item">
+                  <li key={item.id} className="video-list__item">
                     <p className="video-list__item-playCount">play count: {item.stats.playCount}</p>
                     <iframe
                       className="video-list__item-video"
