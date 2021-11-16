@@ -8,7 +8,7 @@ export default function PostList() {
   const [firstPost, setFirstPost] = useState(0);
   const [lastPost, setLastPost] = useState(10);
   const postPerPage = 10;
-  const postsFromApi = 21;
+  const postsFromApi = 30;
   const navigate = useNavigate();
 
   useEffect(() => {
