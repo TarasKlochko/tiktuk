@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Loading from '../loading/Loading';
 import './PostList.css';
 
 export default function PostList() {
@@ -87,22 +88,25 @@ export default function PostList() {
             return null;
           })}
       </ul>
-      <div className="pagination-wrap">
-        <button
-          type="button"
-          className={firstPost ? 'prev-posts' : ' prev-posts prev-posts_disabled'}
-          onClick={handlePrevPosts}
-        >
-          Prev
-        </button>
-        <button
-          type="button"
-          className={lastPost < postsFromApi ? 'prev-posts' : 'prev-posts prev-posts_disabled'}
-          onClick={handleNextPosts}
-        >
-          Next
-        </button>
-      </div>
+      {posts && (
+        <div className="pagination-wrap">
+          <button
+            type="button"
+            className={firstPost ? 'prev-posts' : ' prev-posts prev-posts_disabled'}
+            onClick={handlePrevPosts}
+          >
+            Prev
+          </button>
+          <button
+            type="button"
+            className={lastPost < postsFromApi ? 'prev-posts' : 'prev-posts prev-posts_disabled'}
+            onClick={handleNextPosts}
+          >
+            Next
+          </button>
+        </div>
+      )}
+      {!posts && <Loading />}
     </>
   );
 }

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import postsList from '../../user-feed.json';
+import Loading from '../loading/Loading';
 import './User.css';
 
 console.log(postsList.itemList);
@@ -98,7 +99,7 @@ export default function User() {
         </div>
       )}
 
-      {postsList && (
+      {userData && postsList && (
         <>
           <ul className="video-list">
             {postsList.itemList.map((item, index) => {
@@ -139,6 +140,7 @@ export default function User() {
           </div>
         </>
       )}
+      {!userData && <Loading />}
     </>
   );
 }
