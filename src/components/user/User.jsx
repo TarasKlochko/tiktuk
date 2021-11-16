@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import postsList from '../../user-feed.json';
 import Loading from '../loading/Loading';
+import ErrorMessage from '../errorMessage/ErrorMessage';
 import './User.css';
 
 console.log(postsList.itemList);
@@ -12,6 +13,7 @@ export default function User() {
   // const [postsList, setPostsList] = useState();
   const [firstPost, setFirstPost] = useState(0);
   const [lastPost, setLastPost] = useState(10);
+  const [errorFromAPI, setErrorFromAPI] = useState();
   const postPerPage = 10;
   const postsFromApi = postsList.itemList.length;
 
@@ -30,6 +32,7 @@ export default function User() {
       })
       .catch((err) => {
         console.error(err);
+        setErrorFromAPI(err);
       });
 
     // fetch(`https://tiktok33.p.rapidapi.com/user/feed/${name}`, {
@@ -141,6 +144,7 @@ export default function User() {
         </>
       )}
       {!userData && <Loading />}
+      {errorFromAPI && <ErrorMessage errorMessage={errorFromAPI} />}
     </>
   );
 }

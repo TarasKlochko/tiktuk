@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Loading from '../loading/Loading';
+import ErrorMessage from '../errorMessage/ErrorMessage';
 import './PostList.css';
 
 export default function PostList() {
   const [posts, setPosts] = useState();
   const [firstPost, setFirstPost] = useState(0);
   const [lastPost, setLastPost] = useState(10);
+  const [errorFromAPI, setErrorFromAPI] = useState();
   const postPerPage = 10;
   const postsFromApi = 30;
   const navigate = useNavigate();
@@ -26,6 +28,7 @@ export default function PostList() {
       })
       .catch((err) => {
         console.error(err);
+        setErrorFromAPI(err);
       });
   }, []);
 
@@ -107,6 +110,7 @@ export default function PostList() {
         </div>
       )}
       {!posts && <Loading />}
+      {errorFromAPI && <ErrorMessage errorMessage={errorFromAPI} />}
     </>
   );
 }
