@@ -6,7 +6,7 @@ import UserProfile from '../pages/UserProfile';
 export default function Routing() {
   return (
     <Routes>
-      <Route path="/news" element={<NewsFeed />} />
+      <Route exact path="/" element={<NewsFeed />} />
       <Route path="/user" element={<UserProfile />} />
     </Routes>
   );

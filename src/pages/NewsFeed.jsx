@@ -1,5 +1,6 @@
 import React from 'react';
+import PostList from '../components/postList/PostList';
 
 export default function NewsFeed() {
-  return <div>News feed</div>;
+  return <PostList />;
 }
