@@ -1,0 +1,37 @@
+.user {
+  padding: 15px;
+  max-width: 720px;
+}
+.user__avatar {
+  margin-bottom: 10px;
+}
+.user__avatar-img {
+  width: 100%;
+}
+.user__info {
+}
+.user__item {
+  color: #000000;
+  margin-bottom: 2px;
+}
+.user__item_key {
+  font-weight: 700;
+}
+
+.video-list {
+  padding: 15px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  column-gap: 10px;
+  row-gap: 10px;
+  margin-bottom: 25px;
+}
+.video-list__item {
+}
+.video-list__item-playCount {
+  color: green;
+  text-align: center;
+}
+.video-list__item-video {
+}

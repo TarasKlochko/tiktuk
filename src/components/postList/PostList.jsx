@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './PostList.css';
 
 export default function PostList() {
@@ -7,13 +8,14 @@ export default function PostList() {
   const [lastPost, setLastPost] = useState(10);
   const postPerPage = 10;
   const postsFromApi = 21;
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetch(`https://tiktok33.p.rapidapi.com/trending/feed?&limit=${postsFromApi}`, {
       method: 'GET',
       headers: {
         'x-rapidapi-host': 'tiktok33.p.rapidapi.com',
-        'x-rapidapi-key': '5a73653850msh2d398658b35d08ep117c3cjsn513825c6aa32',
+        'x-rapidapi-key': 'c1257dc04cmshd888bbb072eb770p1f2b8ajsnbf16d4cd1d66',
       },
     })
       .then((response) => response.json())
@@ -25,6 +27,10 @@ export default function PostList() {
         console.error(err);
       });
   }, []);
+
+  function handleUser(name) {
+    navigate(`/user/${name}`);
+  }
 
   function handlePrevPosts() {
     if (firstPost > 0) {
@@ -58,12 +64,14 @@ export default function PostList() {
                     allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   />
                   <div className="post-list__info">
-                    <div className="post-list__avatar">
+                    <div className="post-list__avatar" onClick={() => handleUser(post.authorMeta.name)}>
                       <img className="post-list__avatar-img" src={post.authorMeta.avatar} alt="avatar" />
                     </div>
                     <div className="post-list__info-wrap">
                       <p className="post-list__info-text">{post.text}</p>
-                      <h2 className="post-list__info-name"> {post.authorMeta.name}</h2>
+                      <h2 className="post-list__info-name" onClick={() => handleUser(post.authorMeta.name)}>
+                        {post.authorMeta.name}
+                      </h2>
                       {post.hashtags && (
                         <p className="post-list__info-hash">{post.hashtags.map((hash) => `#${hash.name} `)}</p>
                       )}

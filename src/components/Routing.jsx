@@ -7,7 +7,7 @@ export default function Routing() {
   return (
     <Routes>
       <Route exact path="/" element={<NewsFeed />} />
-      <Route path="/user" element={<UserProfile />} />
+      <Route path="/user/:id" element={<UserProfile />} />
     </Routes>
   );
 }
