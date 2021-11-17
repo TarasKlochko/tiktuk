@@ -29,13 +29,16 @@ export default function User() {
       .then((response) => response.json())
       .then((data) => {
         console.log('userData', data);
+        if (data.message) {
+          throw new Error(data.message);
+        }
         setIsLoading(false);
         setUserData(data);
       })
       .catch((err) => {
-        console.error(err);
+        console.log('erruserData', err);
         setIsLoading(false);
-        setErrorFromAPI(err);
+        setErrorFromAPI(err.message);
       });
 
     // fetch(`https://tiktok33.p.rapidapi.com/user/feed/${name}`, {
@@ -72,7 +75,7 @@ export default function User() {
   return (
     <>
       {isLoading && <Loading />}
-      {userData && (
+      {userData && !errorFromAPI && (
         <div className="user">
           <div className="user__avatar">
             <img className="user__avatar-img" src={userData.user.avatarMedium} alt="avatar" />

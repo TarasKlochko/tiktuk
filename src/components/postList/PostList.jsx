@@ -25,13 +25,16 @@ export default function PostList() {
       .then((response) => response.json())
       .then((data) => {
         console.log('data', data);
+        if (data.message) {
+          throw new Error(data.message);
+        }
         setIsLoading(false);
         setPosts(data);
       })
       .catch((err) => {
         console.error(err);
         setIsLoading(false);
-        setErrorFromAPI(err);
+        setErrorFromAPI(err.message);
       });
   }, []);
 
@@ -58,6 +61,7 @@ export default function PostList() {
       {isLoading && <Loading />}
       <ul className="post-list">
         {posts &&
+          !errorFromAPI &&
           posts.map((post, index) => {
             if (index >= firstPost && index < lastPost) {
               return (
