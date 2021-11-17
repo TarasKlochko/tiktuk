@@ -5,7 +5,6 @@ import Loading from '../loading/Loading';
 import ErrorMessage from '../errorMessage/ErrorMessage';
 import './User.css';
 
-console.log(postsList.itemList);
 export default function User() {
   const [isLoading, setIsLoading] = useState(true);
   const location = useLocation();
@@ -28,7 +27,6 @@ export default function User() {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log('userData', data);
         if (data.message) {
           throw new Error(data.message);
         }
@@ -36,7 +34,7 @@ export default function User() {
         setUserData(data);
       })
       .catch((err) => {
-        console.log('erruserData', err);
+        console.log(err);
         setIsLoading(false);
         setErrorFromAPI(err.message);
       });

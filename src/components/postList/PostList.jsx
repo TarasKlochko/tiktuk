@@ -24,7 +24,6 @@ export default function PostList() {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log('data', data);
         if (data.message) {
           throw new Error(data.message);
         }
