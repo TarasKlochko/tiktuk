@@ -1,0 +1,16 @@
+.error-message__wrap {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+.error-message {
+  text-align: center;
+  font-size: 20px;
+}
+.error-message__title {
+  font-size: 24px;
+  color: red;
+  text-transform: uppercase;
+}
