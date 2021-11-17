@@ -7,6 +7,7 @@ import './User.css';
 
 console.log(postsList.itemList);
 export default function User() {
+  const [isLoading, setIsLoading] = useState(true);
   const location = useLocation();
   const name = location.pathname.split('user/')[1];
   const [userData, setUserData] = useState();
@@ -28,10 +29,12 @@ export default function User() {
       .then((response) => response.json())
       .then((data) => {
         console.log('userData', data);
+        setIsLoading(false);
         setUserData(data);
       })
       .catch((err) => {
         console.error(err);
+        setIsLoading(false);
         setErrorFromAPI(err);
       });
 
@@ -68,6 +71,7 @@ export default function User() {
 
   return (
     <>
+      {isLoading && <Loading />}
       {userData && (
         <div className="user">
           <div className="user__avatar">
@@ -143,7 +147,6 @@ export default function User() {
           </div>
         </>
       )}
-      {!userData && <Loading />}
       {errorFromAPI && <ErrorMessage errorMessage={errorFromAPI} />}
     </>
   );

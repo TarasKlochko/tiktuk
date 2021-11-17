@@ -5,6 +5,7 @@ import ErrorMessage from '../errorMessage/ErrorMessage';
 import './PostList.css';
 
 export default function PostList() {
+  const [isLoading, setIsLoading] = useState(true);
   const [posts, setPosts] = useState();
   const [firstPost, setFirstPost] = useState(0);
   const [lastPost, setLastPost] = useState(10);
@@ -24,10 +25,12 @@ export default function PostList() {
       .then((response) => response.json())
       .then((data) => {
         console.log('data', data);
+        setIsLoading(false);
         setPosts(data);
       })
       .catch((err) => {
         console.error(err);
+        setIsLoading(false);
         setErrorFromAPI(err);
       });
   }, []);
@@ -52,6 +55,7 @@ export default function PostList() {
 
   return (
     <>
+      {isLoading && <Loading />}
       <ul className="post-list">
         {posts &&
           posts.map((post, index) => {
@@ -109,7 +113,6 @@ export default function PostList() {
           </button>
         </div>
       )}
-      {!posts && <Loading />}
       {errorFromAPI && <ErrorMessage errorMessage={errorFromAPI} />}
     </>
   );
