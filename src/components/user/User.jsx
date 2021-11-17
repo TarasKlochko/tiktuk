@@ -10,7 +10,6 @@ export default function User() {
   const location = useLocation();
   const name = location.pathname.split('user/')[1];
   const [userData, setUserData] = useState();
-  // const [postsList, setPostsList] = useState();
   const [firstPost, setFirstPost] = useState(0);
   const [lastPost, setLastPost] = useState(10);
   const [errorFromAPI, setErrorFromAPI] = useState();
@@ -38,22 +37,6 @@ export default function User() {
         setIsLoading(false);
         setErrorFromAPI(err.message);
       });
-
-    // fetch(`https://tiktok33.p.rapidapi.com/user/feed/${name}`, {
-    //   method: 'GET',
-    //   headers: {
-    //     'x-rapidapi-host': 'tiktok33.p.rapidapi.com',
-    //     'x-rapidapi-key': 'c1257dc04cmshd888bbb072eb770p1f2b8ajsnbf16d4cd1d66',
-    //   },
-    // })
-    //   .then((response) => response.json())
-    //   .then((data) => {
-    //     console.log('data', data);
-    //     setPostsList(data);
-    //   })
-    //   .catch((err) => {
-    //     console.error(err);
-    //   });
   }, [name]);
 
   function handlePrevPosts() {
